@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Camera</title>
     <script
@@ -41,13 +41,16 @@
           window.URL = window.webkitURL;
         }
 
-        $("#camera").change(function (e) {
-          $("#picC").attr("src", URL.createObjectURL(e.target.files[0]));
-          console.log("pic object : ", e.target.files[0]);
-        });
+        $("#camera, #gallery").change(function (e) {
+          const image = e.target.files[0];
+          if (!(image.type === "image/jpeg" || image.type === "image/png")) {
+            alert("파일 확장자가 jpeg나 png가 아닙니다.");
+            e.target.value = "";
+            return;
+          }
 
-        $("#gallery").change(function (e) {
-          $("#picG").attr("src", URL.createObjectURL(e.target.files[0]));
+          $("#picC").attr("src", URL.createObjectURL(image));
+          console.log("pic object : ", e.target.files[0]);
         });
       });
     </script>
