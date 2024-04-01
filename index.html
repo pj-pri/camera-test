@@ -1,26 +1,74 @@
 <!DOCTYPE html>
-<html lang="kr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Test</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Camera</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .layer {
+        width: 100%;
+        display: flex;
+        border: 1px solid black;
+      }
+      .split {
+        flex-shrink: 0;
+        width: 50%;
+        border: 1px solid black;
+        margin: 1px;
+      }
+      .input {
+        display: block;
+        border: 1px solid black;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+
     <script>
-        $(document).ready(function(){
-            if (!('url' in window) && ('webkitURL' in window)) {
-                window.URL = window.webkitURL;
-            }
+      $(document).ready(function () {
+        if (!("url" in window) && "webkitURL" in window) {
+          window.URL = window.webkitURL;
+        }
 
-            $('#camera').change(function(e){
-                $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
-            });
+        $("#camera").change(function (e) {
+          $("#picC").attr("src", URL.createObjectURL(e.target.files[0]));
+          console.log("pic object : ", e.target.files[0]);
         });
-    </script>
-</head>
-<body>
-    <input type="file" id="camera" name="camera" capture="camera" accept="image/*" />
-    <br />
 
-    <img id="pic" style="width:100%;" />
-</body>
+        $("#gallery").change(function (e) {
+          $("#picG").attr("src", URL.createObjectURL(e.target.files[0]));
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="layer">
+      <!-- camera -->
+      <div class="split">
+        <input
+          type="file"
+          id="camera"
+          name="camera"
+          capture="camera"
+          accept="image/*"
+        />
+        <br />
+        <img id="picC" />
+      </div>
+      <!-- gallery -->
+      <div class="split">
+        <input type="file" name="gallery" id="gallery" />
+        <br />
+        <img id="picG" alt="" />
+      </div>
+    </div>
+  </body>
 </html>
