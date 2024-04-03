@@ -41,7 +41,7 @@
           window.URL = window.webkitURL;
         }
 
-        $("#camera, #gallery").change(function (e) {
+        $("#camera").change(function (e) {
           const image = e.target.files[0];
           if (!(image.type === "image/jpeg" || image.type === "image/png")) {
             alert("파일 확장자가 jpeg나 png가 아닙니다.");
@@ -52,6 +52,29 @@
           $("#picC").attr("src", URL.createObjectURL(image));
           console.log("pic object : ", e.target.files[0]);
         });
+
+        $("#gallery").change(function (e) {
+          const images = e.target.files;
+          const imgList = document.querySelector('#imgList');
+
+          imgList.innerHTML = '';
+
+          images.forEach(image => {
+
+            if (!(image.type === "image/jpeg" || image.type === "image/png")) {
+              alert("파일 확장자가 jpeg나 png가 아닙니다.");
+              e.target.value = "";
+              return;
+            }
+
+            const imgTag = document.createElement('img');
+            imgTag.src = URL.createObjectURL(image);
+
+            imgList.insertAdjacentElement('beforeend', imgTag);
+            
+          });
+          
+        })
       });
     </script>
   </head>
@@ -79,7 +102,7 @@
         multiple
         />
         <br />
-        <img id="picG" alt="" />
+        <div id="imgList"></div>
       </div>
     </div>
   </body>
