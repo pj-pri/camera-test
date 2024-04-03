@@ -67,6 +67,7 @@
           name="camera"
           capture="camera"
           accept="image/*"
+          multiple
         />
         <br />
         <img id="picC" />
@@ -74,7 +75,9 @@
       <!-- gallery -->
       <div class="split">
         <h4>갤러리</h4>
-        <input type="file" name="gallery" id="gallery" />
+        <input type="file" name="gallery" id="gallery" 
+        multiple
+        />
         <br />
         <img id="picG" alt="" />
       </div>
