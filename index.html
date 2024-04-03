@@ -55,32 +55,35 @@
 
         $("#gallery").change(function (e) {
           const images = e.target.files;
-          const imgList = document.querySelector('#imgList');
 
-          imgList.innerHTML = '';
+          const imgList = document.querySelector("#imgList");
 
-          images.forEach(image => {
+          imgList.innerHTML = "";
 
-            if (!(image.type === "image/jpeg" || image.type === "image/png")) {
-              alert("파일 확장자가 jpeg나 png가 아닙니다.");
-              e.target.value = "";
-              return;
-            }
+          Object.keys(images)
+            .map((key) => images[key])
+            .forEach((image) => {
+              if (
+                !(image.type === "image/jpeg" || image.type === "image/png")
+              ) {
+                alert("파일 확장자가 jpeg나 png가 아닙니다.");
+                e.target.value = "";
+                return;
+              }
 
-            const imgTag = document.createElement('img');
-            imgTag.src = URL.createObjectURL(image);
-            imgTag.style = 'display:block;height:300px;';
+              const imgTag = document.createElement("img");
+              imgTag.src = URL.createObjectURL(image);
+              imgTag.style = "display:block;height:300px;";
 
-            imgList.insertAdjacentElement('beforeend', imgTag);
-            
-          });
-          
-        })
+              imgList.insertAdjacentElement("beforeend", imgTag);
+            });
+        });
       });
     </script>
   </head>
 
   <body>
+    11
     <div class="layer">
       <!-- camera -->
       <div class="split">
@@ -99,9 +102,7 @@
       <!-- gallery -->
       <div class="split">
         <h4>갤러리</h4>
-        <input type="file" name="gallery" id="gallery" 
-        multiple
-        />
+        <input type="file" name="gallery" id="gallery" multiple />
         <br />
         <div id="imgList"></div>
       </div>
